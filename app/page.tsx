@@ -1,8 +1,15 @@
+import AboutSection from "./components/About";
+import OurValues from "./components/OurValues";
+import PacksSection from "./components/PacksSection";
+import WhyChooseUs from "./components/WhyChooseUs";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center grid-bg">
-      <h1 className="text-4xl font-bold text-gray-800">Welcome to Mohamed Liberta's Website</h1>
+    <div className="min-h-screen grid-bg">
+      <AboutSection />
+      <WhyChooseUs />
+      {/* <OurValues /> */}
+      <PacksSection />
     </div>
   );
 }
