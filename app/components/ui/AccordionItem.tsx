@@ -1,85 +1,57 @@
-// Components/Accordion.tsx
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+"use client";
+
+import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
-interface AccordionItemProps {
+export type FAQItem = {
+  id: string;
   question: string;
   answer: string;
-  isOpen: boolean;
-  onClick: () => void;
-}
-
-const AccordionItem: React.FC<AccordionItemProps> = ({
-  question,
-  answer,
-  isOpen,
-  onClick,
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className={`border border-slate-200 rounded-2xl cursor-pointer overflow-hidden  shadow-sm hover:shadow-md transition-shadow duration-300 ${isOpen ? "bg-third" : "bg-white"}`}
-    >
-      {/* Question Header */}
-      <button
-        onClick={onClick}
-        className="w-full flex items-center cursor-pointer justify-between gap-4 p-6 lg:p-8 text-left group"
-        aria-expanded={isOpen}
-      >
-        <h3 className={`text-lg lg:text-xl font-bold text-slate-900 group-hover:text-primary transition-colors pr-4`}>
-          {question}
-        </h3>
-        
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="shrink-0 w-10 h-10 rounded-full bg-slate-100 group-hover:bg-primary/10 flex items-center justify-center transition-colors"
-        >
-          {isOpen ? (
-            <Minus className="w-5 h-5 text-primary" strokeWidth={2.5} />
-          ) : (
-            <Plus className="w-5 h-5 text-slate-600 group-hover:text-primary transition-colors" strokeWidth={2.5} />
-          )}
-        </motion.div>
-      </button>
-
-      {/* Answer Content */}
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ 
-              height: "auto", 
-              opacity: 1,
-              transition: {
-                height: { duration: 0.3, ease: "easeInOut" },
-                opacity: { duration: 0.25, delay: 0.1 }
-              }
-            }}
-            exit={{ 
-              height: 0, 
-              opacity: 0,
-              transition: {
-                height: { duration: 0.3, ease: "easeInOut" },
-                opacity: { duration: 0.2 }
-              }
-            }}
-            className="overflow-hidden"
-          >
-            <div className="px-6 lg:px-8 pb-6 lg:pb-8">
-              <p className={`text-slate-600 leading-relaxed text-base lg:text-lg ${isOpen ? "text-white" : ""} `}>
-                {answer}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
 };
 
-export default AccordionItem;
+interface AccordionItemProps {
+  item: FAQItem;
+}
+
+export default function AccordionItem({ item }: AccordionItemProps) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      className={[
+        "border-b border-[#E8E4DC] px-12 cursor-pointer transition-colors duration-300",
+        open ? "bg-primary" : "bg-transparent",
+      ].join(" ")}
+    >
+      <button
+        onClick={() => setOpen(!open)}
+        className="group w-full cursor-pointer  flex items-center justify-between gap-6 py-6 px-0 text-left"
+        aria-expanded={open}
+      >
+        <span
+          className={[
+            "text-[1rem] font-light leading-snug transition-colors duration-300 text-secondary ",
+          ].join(" ")}
+        >
+          {item.question}
+        </span>
+
+        <span className="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-secondary text-white transition-all duration-300y">
+          {open ? <Minus size={13} strokeWidth={2} /> : <Plus size={13} strokeWidth={2} />}
+        </span>
+      </button>
+
+      {/* Answer */}
+      <div
+        className={[
+          "overflow-hidden transition-all duration-300 ease-in-out",
+          open ? "max-h-96 pb-6" : "max-h-0",
+        ].join(" ")}
+      >
+        <p className="text-[0.88rem] font-light leading-[1.85] pr-12">
+          {item.answer}
+        </p>
+      </div>
+    </div>
+  );
+}

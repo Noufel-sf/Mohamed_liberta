@@ -1,112 +1,87 @@
-// Components/FAQSection.tsx
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import AccordionItem from "./ui/AccordionItem";
-import { faqs } from "../utils/data";
-import HeadingText from "./ui/HeadingText";
+import AccordionItem, { type FAQItem } from "../components/ui/AccordionItem";
 
+const faqs: FAQItem[] = [
+  {
+    id: "booking",
+    question: "How do I book a session?",
+    answer:
+      "Simply reach out via the contact page or message me on WhatsApp or Instagram. Once we discuss your vision and confirm the date, a 30% deposit secures your booking.",
+  },
+  {
+    id: "delivery",
+    question: "How long until I receive my photos?",
+    answer:
+      "Standard delivery is 30 days after your session. The Prestige package includes priority 20-day delivery. You'll receive a private online gallery link to download your full collection.",
+  },
+  {
+    id: "travel",
+    question: "Do you travel for shoots?",
+    answer:
+      "Yes! All packages include travel within 50 miles at no extra charge. For destinations beyond that — including international — travel costs are discussed and agreed upon before booking.",
+  },
+  {
+    id: "editing",
+    question: "What does 'edited' mean for the delivered images?",
+    answer:
+      "Every image is professionally color-graded, exposure-corrected, and retouched. I aim for a timeless, natural look. Heavy filters or dramatic presets are not my style unless specifically requested.",
+  },
+  {
+    id: "raw",
+    question: "Can I get the RAW files?",
+    answer:
+      "RAW files are not included in any package. The edited gallery is the final deliverable. This ensures every image you receive meets my quality standard.",
+  },
+  {
+    id: "weather",
+    question: "What if it rains on the day?",
+    answer:
+      "Weather happens! We can reschedule at no extra cost for outdoor sessions if conditions are truly unfavorable. Many couples embrace overcast or light-rain days — they often produce beautiful, moody results.",
+  },
+  {
+    id: "payment",
+    question: "What payment methods do you accept?",
+    answer:
+      "I accept bank transfer, PayPal, and most major cards. A 30% deposit is due at booking, with the remaining balance due 14 days before your event.",
+  },
+];
 
-const AskedQuestions: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-
-  const handleToggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
+export default function AskedQuestions() {
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      
-      {/* Decorative circles matching the image */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-20 left-10 w-16 h-16 border-4 border-secondary/30 rounded-full"
-      />
-      
-      <motion.div
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-        className="absolute bottom-32 right-16 w-12 h-12 bg-primary/20 rounded-full"
-      />
+    <section id="faq" className="w-full py-28 px-6 md:px-16 lg:px-24">
+      <div className="max-w-3xl mx-auto">
 
-      <motion.div
-        animate={{
-          y: [0, 20, 0],
-          rotate: [0, 10, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/4 right-20 w-8 h-8 bg-third/30 rounded-lg"
-      />
-
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-            className="inline-flex items-center justify-center w-26 h-16 rounded-2xl mb-6"
-          >
-            <img src="/q.png" alt="question" className="w-60" />
-          </motion.div>
-
-        <HeadingText 
-          heading="الأسئلة"
-          subheading="هل لديك"
-          subheading2="الشائعة"
-          description="إليك بعض الأسئلة الشائعة حول رُقي للشباب وإجاباتها لمساعدتك في معرفة المزيد عنا."
-        />
-        </motion.div>
-
-        {/* FAQ Accordion Grid */}
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                key={faq.id}
-                question={faq.question}
-                answer={faq.answer}
-                isOpen={openIndex === index}
-                onClick={() => handleToggle(index)}
-              />
-            ))}
-          </div>
+        {/* Header */}
+        <div className="flex flex-col items-center text-center gap-4 mb-16">
+          <p className="text-[0.7rem] tracking-[0.22em] uppercase text-primary">
+            FAQ
+          </p>
+          <h2 className="font-serif font-light text-[2.6rem] lg:text-[3.5rem] leading-[1.06] tracking-tight text-[#1A1A18]">
+            Most asked{" "}
+            <em className="italic text-primary">questions.</em>
+          </h2>
+          <div className="w-10 h-px bg-primary mt-1" />
         </div>
 
-      
+        {/* Accordion list */}
+        <div className="border-t border-[#E8E4DC]">
+          {faqs.map((faq) => (
+            <AccordionItem key={faq.id} item={faq} />
+          ))}
+        </div>
+
+        {/* Footer note */}
+        <p className="text-center text-[0.78rem] text-[#AEAAA4] mt-12 leading-relaxed">
+          Still have a question?{" "}
+          <a
+            href="/contact"
+            className="text-primary underline underline-offset-4 hover:opacity-70 transition-opacity"
+          >
+            Reach out directly
+          </a>
+          .
+        </p>
+
       </div>
     </section>
   );
-};
-
-export default AskedQuestions;
+}

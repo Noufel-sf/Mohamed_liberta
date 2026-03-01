@@ -10,6 +10,13 @@ html {
   font-weight: 700;
 }
 
+.Arabic {
+  font-family: "Baloo Bhaijaan 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .grid-bg {
   background-image:
     linear-gradient(to right, #e5e7eb 1px, transparent 1px),
@@ -43,13 +50,36 @@ html {
   transform: scale(1.04);
 }
 
+/* ===========================================
+   MARQUEE KEYFRAMES
+============================================ */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-33.333%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+
+
 @theme {
   /* ===========================================
      COLORS (LIGHT MODE)
   ============================================ */
-  --color-primary: #8d0430;
+  --color-primary: #c8a882;
 
-  --color-secondary: #ffa9c4;
+  --color-secondary: #1a1a18;
 
   --color-secondary-foreground: #ffffff;
 
@@ -141,5 +171,16 @@ html {
 
   /* usage:
      shadow-lg
+  */
+
+  /* ===========================================
+     ANIMATIONS
+  ============================================ */
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 30s linear infinite;
+
+  /* usage:
+     animate-marquee
+     animate-marquee-reverse
   */
 }

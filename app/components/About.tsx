@@ -124,13 +124,13 @@ export default function AboutSection() {
             <div className="flex items-center gap-8 pt-2">
               <a
                 href="#contact"
-                className="inline-block px-9 py-3.5 bg-[#1A1A18] text-[#FEFEFE] text-[0.72rem] tracking-[0.15em] uppercase hover:bg-[#C8A882] transition-colors duration-300"
+                className="inline-block px-9 py-3.5 bg-secondary text-[#FEFEFE] text-[0.72rem] tracking-[0.15em] uppercase hover:bg-primary transition-colors duration-300"
               >
                 Work With Me
               </a>
               <a
                 href="#gallery"
-                className="text-[0.72rem] tracking-[0.12em] uppercase text-[#7A7A75] border-b border-[#7A7A75] pb-0.5 hover:text-[#1A1A18] hover:border-[#1A1A18] transition-colors duration-200"
+                className="text-[0.72rem] tracking-[0.12em] uppercase text-[#7A7A75] border-b border-[#7A7A75] pb-0.5 hover:text-primary hover:border-primary transition-colors duration-200"
               >
                 View Gallery
               </a>
